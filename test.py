@@ -22,9 +22,35 @@ msg2 = \
     print "The value of variable x is " , x
 '''
 
-parser.parse(msg , lexer=lexer)
+msg3 = \
+'''
+    a = 1
+    while a <= 100
+        print a
+        a = a + 1
+    endwhile
+'''
+
+testEnd = \
+'''
+    a = 1
+    while a <= 10
+        print a
+        a = a + 1
+        if a == 7 then
+            end
+        endif
+    endwhile
+'''
+
+testErr = \
+'''
+    input "enter value for a"
+'''
+
+parser.parse(testEnd , lexer=lexer)
 print(state.AST)
-#dump_AST(state.AST)
+dump_AST(state.AST)
 walk(state.AST)
-print(state.symbol_table)
+#print(state.symbol_table)
 

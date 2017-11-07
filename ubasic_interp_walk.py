@@ -220,8 +220,8 @@ def paren_exp(node):
 #########################################################################
 # updated for ubasic
 def end_stmt(node):
-    (end) = node
-    assert_match(end , 'end')
+    (END,) = node
+    assert_match(END , 'exit')
     
     # do nothing
     quit()
@@ -305,7 +305,7 @@ dispatch_dict = {
     'assign' : assign_stmt,
     'input'     : input_stmt,
     'print'     : print_stmt,
-    'end'       : end_stmt,
+    'exit'       : end_stmt,
     'if'        : if_stmt,
     'else'      : else_stmt,
     'while'     : while_stmt,
