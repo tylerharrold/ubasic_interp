@@ -8,7 +8,7 @@ class State:
         self.symbol_table = {}
 
         # dictionary to hold label definitions
-        self.lable_table = {}
+        self.label_table = {}
 
         # when done parsing this variable will hold our AST
         self.AST = None

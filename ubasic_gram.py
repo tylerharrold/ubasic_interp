@@ -55,7 +55,7 @@ def p_stmt(p):
     elif p[1] == 'end':
         p[0] = ('end')
     elif p[1] == 'if':
-        p[0] = ('if' , p[2] , p[3] ,p[4], p[5]) 
+        p[0] = ('if' , p[2] , p[4], p[5]) 
     elif p[1] == 'while':
         p[0] = ('while' , p[2] , p[3])
     elif p[1] == 'for':
@@ -88,7 +88,7 @@ def p_opt_else(p):
     if len(p) == 3:
         p[0] = ('else' , p[2])
     else:
-        p[0] = p[1]
+        p[0] = ('nil',)
 
 def p_value_list(p):
     '''
@@ -100,14 +100,23 @@ def p_value_list(p):
     else:
         p[0] = p[1]
 
-
-def p_value(p):
+def p_value_id(p):
     '''
     value : ID
-          | INTEGER
-          | STRING
     '''
-    p[0] = p[1]
+    p[0] = ('id' , p[1])
+
+def p_value_integer(p):
+    '''
+    value : INTEGER
+    '''
+    p[0] = ('integer' , p[1])
+
+def p_value_string(p):
+    '''
+    value : STRING
+    '''
+    p[0] = ('string' , p[1])
 
 def p_exp_binary_exp(p):
     '''
@@ -120,7 +129,7 @@ def p_exp_binary_exp(p):
         | exp AND exp
         | exp OR exp
     '''
-    p[0] = (p[1] , p[2] , p[3])
+    p[0] = (p[2] , p[1] , p[3])
 
 def p_exp_paren(p):
     '''

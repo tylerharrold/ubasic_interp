@@ -30,11 +30,13 @@ def print_stmt(node):
     (PRINT , value , value_list) = node
     assert_match(PRINT , 'print')
 
+    msg = walk(value)
+
     if not value_list:
-        print(value)
+        print(msg)
     else:
-        value_list = walk(value_list)
-        print(value , value_list)
+        msg += str(walk(value_list))
+        print(msg)
 
 #########################################################################
 # updated for ubasic
@@ -47,26 +49,11 @@ def assign_stmt(node):
     state.symbol_table[name] = value
 
 #########################################################################
-def get_stmt(node):
-
-    (GET, name) = node
-    assert_match(GET, 'get')
-
-    s = input("Value for " + name + '? ')
-    
-    try:
-        value = int(s)
-    except ValueError:
-        raise ValueError("expected an integer value for " + name)
-    
-    state.symbol_table[name] = value
-
-#########################################################################
 # updated for ubasic
 def input_stmt(node):
 
     (PUT, opt_string, exp) = node
-    assert_match(PUT, 'put')
+    assert_match(PUT, 'input')
 
     state.symbol_table[exp] = int(input(opt_string))
     
@@ -106,6 +93,12 @@ def if_stmt(node):
             walk(then_stmt)
         return
 
+#########################################################################
+def else_stmt(node):
+    (ELSE , stmt_list) = node
+    assert_match(ELSE , 'else')
+
+    walk(stmt_list)
 #########################################################################
 def block_stmt(node):
     
@@ -225,6 +218,7 @@ def paren_exp(node):
 
 
 #########################################################################
+# updated for ubasic
 def end_stmt(node):
     (end) = node
     assert_match(end , 'end')
@@ -243,10 +237,29 @@ def value_list(node):
     
     # if value list is None, we can just return value
     if not value_list:
-        return value
+        return walk(value)
     
     values = walk(value_list)
     return value + value_list
+#########################################################################
+def val_id(node):
+    (ID , val) = node
+    assert_match(ID , 'id')
+
+    return state.symbol_table[val]
+##########################################################################
+def val_integer(node):
+    (INTEGER , val) = node
+    assert_match(INTEGER , 'integer')
+
+    return val
+##########################################################################
+def val_string(node):
+    (STRING , val) = node
+    assert_match(STRING , 'string')
+
+    return val
+
 
 #########################################################################
 # walk
@@ -288,14 +301,27 @@ dispatch_dict = {
 
 dispatch_dict = {
     'seq'   : seq,
+    'nil'   : nil,
     'assign' : assign_stmt,
     'input'     : input_stmt,
     'print'     : print_stmt,
     'end'       : end_stmt,
     'if'        : if_stmt,
+    'else'      : else_stmt,
     'while'     : while_stmt,
     'for'       : for_stmt,
-    'value_list' : value_list
+    'value_list' : value_list,
+    'id'        : val_id,
+    'integer'   : val_integer,
+    'string'    : val_string,
+    '+'         : plus_exp,
+    '-'         : minus_exp,
+    '*'         : times_exp,
+    '/'         : divide_exp,
+    '=='        : eq_exp,
+    '<='        : le_exp,
+    'uminus'    : uminus_exp,
+    'not'       : not_exp
         
         
         
