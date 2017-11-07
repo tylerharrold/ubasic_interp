@@ -1,0 +1,1837 @@
+Created by PLY version 3.10 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> prog
+Rule 1     prog -> stmt_list
+Rule 2     stmt_list -> stmt stmt_list
+Rule 3     stmt_list -> stmt
+Rule 4     stmt -> ID = exp
+Rule 5     stmt -> INPUT opt_string ID
+Rule 6     stmt -> PRINT value value_list
+Rule 7     stmt -> END
+Rule 8     stmt -> IF exp THEN stmt_list opt_else ENDIF
+Rule 9     stmt -> WHILE exp stmt_list ENDWHILE
+Rule 10    stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT ID
+Rule 11    opt_step -> STEP exp
+Rule 12    opt_step -> empty
+Rule 13    opt_string -> STRING ,
+Rule 14    opt_string -> empty
+Rule 15    opt_else -> ELSE stmt_list
+Rule 16    opt_else -> empty
+Rule 17    value_list -> , value value_list
+Rule 18    value_list -> empty
+Rule 19    value -> ID
+Rule 20    value -> INTEGER
+Rule 21    value -> STRING
+Rule 22    exp -> exp PLUS exp
+Rule 23    exp -> exp MINUS exp
+Rule 24    exp -> exp TIMES exp
+Rule 25    exp -> exp DIVIDE exp
+Rule 26    exp -> exp EQ exp
+Rule 27    exp -> exp LE exp
+Rule 28    exp -> exp AND exp
+Rule 29    exp -> exp OR exp
+Rule 30    exp -> ( exp )
+Rule 31    exp -> MINUS exp
+Rule 32    exp -> NOT exp
+Rule 33    exp -> INTEGER
+Rule 34    exp -> ID
+Rule 35    empty -> <empty>
+
+Terminals, with rules where they appear
+
+(                    : 30
+)                    : 30
+,                    : 13 17
+=                    : 4 10
+AND                  : 28
+DIVIDE               : 25
+ELSE                 : 15
+END                  : 7
+ENDIF                : 8
+ENDWHILE             : 9
+EQ                   : 26
+FOR                  : 10
+ID                   : 4 5 10 10 19 34
+IF                   : 8
+INPUT                : 5
+INTEGER              : 20 33
+LE                   : 27
+MINUS                : 23 31
+NEXT                 : 10
+NOT                  : 32
+OR                   : 29
+PLUS                 : 22
+PRINT                : 6
+STEP                 : 11
+STRING               : 13 21
+THEN                 : 8
+TIMES                : 24
+TO                   : 10
+WHILE                : 9
+error                : 
+
+Nonterminals, with rules where they appear
+
+empty                : 12 14 16 18
+exp                  : 4 8 9 10 10 11 22 22 23 23 24 24 25 25 26 26 27 27 28 28 29 29 30 31 32
+opt_else             : 8
+opt_step             : 10
+opt_string           : 5
+prog                 : 0
+stmt                 : 2 3
+stmt_list            : 1 2 8 9 10 15
+value                : 6 17
+value_list           : 6 17
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . prog
+    (1) prog -> . stmt_list
+    (2) stmt_list -> . stmt stmt_list
+    (3) stmt_list -> . stmt
+    (4) stmt -> . ID = exp
+    (5) stmt -> . INPUT opt_string ID
+    (6) stmt -> . PRINT value value_list
+    (7) stmt -> . END
+    (8) stmt -> . IF exp THEN stmt_list opt_else ENDIF
+    (9) stmt -> . WHILE exp stmt_list ENDWHILE
+    (10) stmt -> . FOR ID = exp TO exp opt_step stmt_list NEXT ID
+
+    ID              shift and go to state 4
+    INPUT           shift and go to state 5
+    PRINT           shift and go to state 6
+    END             shift and go to state 7
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
+    FOR             shift and go to state 10
+
+    prog                           shift and go to state 1
+    stmt_list                      shift and go to state 2
+    stmt                           shift and go to state 3
+
+state 1
+
+    (0) S' -> prog .
+
+
+
+state 2
+
+    (1) prog -> stmt_list .
+
+    $end            reduce using rule 1 (prog -> stmt_list .)
+
+
+state 3
+
+    (2) stmt_list -> stmt . stmt_list
+    (3) stmt_list -> stmt .
+    (2) stmt_list -> . stmt stmt_list
+    (3) stmt_list -> . stmt
+    (4) stmt -> . ID = exp
+    (5) stmt -> . INPUT opt_string ID
+    (6) stmt -> . PRINT value value_list
+    (7) stmt -> . END
+    (8) stmt -> . IF exp THEN stmt_list opt_else ENDIF
+    (9) stmt -> . WHILE exp stmt_list ENDWHILE
+    (10) stmt -> . FOR ID = exp TO exp opt_step stmt_list NEXT ID
+
+    $end            reduce using rule 3 (stmt_list -> stmt .)
+    ENDWHILE        reduce using rule 3 (stmt_list -> stmt .)
+    ELSE            reduce using rule 3 (stmt_list -> stmt .)
+    ENDIF           reduce using rule 3 (stmt_list -> stmt .)
+    NEXT            reduce using rule 3 (stmt_list -> stmt .)
+    ID              shift and go to state 4
+    INPUT           shift and go to state 5
+    PRINT           shift and go to state 6
+    END             shift and go to state 7
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
+    FOR             shift and go to state 10
+
+    stmt                           shift and go to state 3
+    stmt_list                      shift and go to state 11
+
+state 4
+
+    (4) stmt -> ID . = exp
+
+    =               shift and go to state 12
+
+
+state 5
+
+    (5) stmt -> INPUT . opt_string ID
+    (13) opt_string -> . STRING ,
+    (14) opt_string -> . empty
+    (35) empty -> .
+
+    STRING          shift and go to state 14
+    ID              reduce using rule 35 (empty -> .)
+
+    opt_string                     shift and go to state 13
+    empty                          shift and go to state 15
+
+state 6
+
+    (6) stmt -> PRINT . value value_list
+    (19) value -> . ID
+    (20) value -> . INTEGER
+    (21) value -> . STRING
+
+    ID              shift and go to state 17
+    INTEGER         shift and go to state 18
+    STRING          shift and go to state 19
+
+    value                          shift and go to state 16
+
+state 7
+
+    (7) stmt -> END .
+
+    ID              reduce using rule 7 (stmt -> END .)
+    INPUT           reduce using rule 7 (stmt -> END .)
+    PRINT           reduce using rule 7 (stmt -> END .)
+    END             reduce using rule 7 (stmt -> END .)
+    IF              reduce using rule 7 (stmt -> END .)
+    WHILE           reduce using rule 7 (stmt -> END .)
+    FOR             reduce using rule 7 (stmt -> END .)
+    $end            reduce using rule 7 (stmt -> END .)
+    ENDWHILE        reduce using rule 7 (stmt -> END .)
+    ELSE            reduce using rule 7 (stmt -> END .)
+    ENDIF           reduce using rule 7 (stmt -> END .)
+    NEXT            reduce using rule 7 (stmt -> END .)
+
+
+state 8
+
+    (8) stmt -> IF . exp THEN stmt_list opt_else ENDIF
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 20
+
+state 9
+
+    (9) stmt -> WHILE . exp stmt_list ENDWHILE
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 26
+
+state 10
+
+    (10) stmt -> FOR . ID = exp TO exp opt_step stmt_list NEXT ID
+
+    ID              shift and go to state 27
+
+
+state 11
+
+    (2) stmt_list -> stmt stmt_list .
+
+    $end            reduce using rule 2 (stmt_list -> stmt stmt_list .)
+    ENDWHILE        reduce using rule 2 (stmt_list -> stmt stmt_list .)
+    ELSE            reduce using rule 2 (stmt_list -> stmt stmt_list .)
+    ENDIF           reduce using rule 2 (stmt_list -> stmt stmt_list .)
+    NEXT            reduce using rule 2 (stmt_list -> stmt stmt_list .)
+
+
+state 12
+
+    (4) stmt -> ID = . exp
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 28
+
+state 13
+
+    (5) stmt -> INPUT opt_string . ID
+
+    ID              shift and go to state 29
+
+
+state 14
+
+    (13) opt_string -> STRING . ,
+
+    ,               shift and go to state 30
+
+
+state 15
+
+    (14) opt_string -> empty .
+
+    ID              reduce using rule 14 (opt_string -> empty .)
+
+
+state 16
+
+    (6) stmt -> PRINT value . value_list
+    (17) value_list -> . , value value_list
+    (18) value_list -> . empty
+    (35) empty -> .
+
+    ,               shift and go to state 32
+    ID              reduce using rule 35 (empty -> .)
+    INPUT           reduce using rule 35 (empty -> .)
+    PRINT           reduce using rule 35 (empty -> .)
+    END             reduce using rule 35 (empty -> .)
+    IF              reduce using rule 35 (empty -> .)
+    WHILE           reduce using rule 35 (empty -> .)
+    FOR             reduce using rule 35 (empty -> .)
+    $end            reduce using rule 35 (empty -> .)
+    ENDWHILE        reduce using rule 35 (empty -> .)
+    ELSE            reduce using rule 35 (empty -> .)
+    ENDIF           reduce using rule 35 (empty -> .)
+    NEXT            reduce using rule 35 (empty -> .)
+
+    value_list                     shift and go to state 31
+    empty                          shift and go to state 33
+
+state 17
+
+    (19) value -> ID .
+
+    ,               reduce using rule 19 (value -> ID .)
+    ID              reduce using rule 19 (value -> ID .)
+    INPUT           reduce using rule 19 (value -> ID .)
+    PRINT           reduce using rule 19 (value -> ID .)
+    END             reduce using rule 19 (value -> ID .)
+    IF              reduce using rule 19 (value -> ID .)
+    WHILE           reduce using rule 19 (value -> ID .)
+    FOR             reduce using rule 19 (value -> ID .)
+    $end            reduce using rule 19 (value -> ID .)
+    ENDWHILE        reduce using rule 19 (value -> ID .)
+    ELSE            reduce using rule 19 (value -> ID .)
+    ENDIF           reduce using rule 19 (value -> ID .)
+    NEXT            reduce using rule 19 (value -> ID .)
+
+
+state 18
+
+    (20) value -> INTEGER .
+
+    ,               reduce using rule 20 (value -> INTEGER .)
+    ID              reduce using rule 20 (value -> INTEGER .)
+    INPUT           reduce using rule 20 (value -> INTEGER .)
+    PRINT           reduce using rule 20 (value -> INTEGER .)
+    END             reduce using rule 20 (value -> INTEGER .)
+    IF              reduce using rule 20 (value -> INTEGER .)
+    WHILE           reduce using rule 20 (value -> INTEGER .)
+    FOR             reduce using rule 20 (value -> INTEGER .)
+    $end            reduce using rule 20 (value -> INTEGER .)
+    ENDWHILE        reduce using rule 20 (value -> INTEGER .)
+    ELSE            reduce using rule 20 (value -> INTEGER .)
+    ENDIF           reduce using rule 20 (value -> INTEGER .)
+    NEXT            reduce using rule 20 (value -> INTEGER .)
+
+
+state 19
+
+    (21) value -> STRING .
+
+    ,               reduce using rule 21 (value -> STRING .)
+    ID              reduce using rule 21 (value -> STRING .)
+    INPUT           reduce using rule 21 (value -> STRING .)
+    PRINT           reduce using rule 21 (value -> STRING .)
+    END             reduce using rule 21 (value -> STRING .)
+    IF              reduce using rule 21 (value -> STRING .)
+    WHILE           reduce using rule 21 (value -> STRING .)
+    FOR             reduce using rule 21 (value -> STRING .)
+    $end            reduce using rule 21 (value -> STRING .)
+    ENDWHILE        reduce using rule 21 (value -> STRING .)
+    ELSE            reduce using rule 21 (value -> STRING .)
+    ENDIF           reduce using rule 21 (value -> STRING .)
+    NEXT            reduce using rule 21 (value -> STRING .)
+
+
+state 20
+
+    (8) stmt -> IF exp . THEN stmt_list opt_else ENDIF
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    THEN            shift and go to state 34
+    PLUS            shift and go to state 35
+    MINUS           shift and go to state 36
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+    EQ              shift and go to state 39
+    LE              shift and go to state 40
+    AND             shift and go to state 41
+    OR              shift and go to state 42
+
+
+state 21
+
+    (31) exp -> MINUS . exp
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 43
+
+state 22
+
+    (30) exp -> ( . exp )
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 44
+
+state 23
+
+    (32) exp -> NOT . exp
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 45
+
+state 24
+
+    (33) exp -> INTEGER .
+
+    THEN            reduce using rule 33 (exp -> INTEGER .)
+    PLUS            reduce using rule 33 (exp -> INTEGER .)
+    MINUS           reduce using rule 33 (exp -> INTEGER .)
+    TIMES           reduce using rule 33 (exp -> INTEGER .)
+    DIVIDE          reduce using rule 33 (exp -> INTEGER .)
+    EQ              reduce using rule 33 (exp -> INTEGER .)
+    LE              reduce using rule 33 (exp -> INTEGER .)
+    AND             reduce using rule 33 (exp -> INTEGER .)
+    OR              reduce using rule 33 (exp -> INTEGER .)
+    ID              reduce using rule 33 (exp -> INTEGER .)
+    INPUT           reduce using rule 33 (exp -> INTEGER .)
+    PRINT           reduce using rule 33 (exp -> INTEGER .)
+    END             reduce using rule 33 (exp -> INTEGER .)
+    IF              reduce using rule 33 (exp -> INTEGER .)
+    WHILE           reduce using rule 33 (exp -> INTEGER .)
+    FOR             reduce using rule 33 (exp -> INTEGER .)
+    $end            reduce using rule 33 (exp -> INTEGER .)
+    ENDWHILE        reduce using rule 33 (exp -> INTEGER .)
+    ELSE            reduce using rule 33 (exp -> INTEGER .)
+    ENDIF           reduce using rule 33 (exp -> INTEGER .)
+    NEXT            reduce using rule 33 (exp -> INTEGER .)
+    )               reduce using rule 33 (exp -> INTEGER .)
+    TO              reduce using rule 33 (exp -> INTEGER .)
+    STEP            reduce using rule 33 (exp -> INTEGER .)
+
+
+state 25
+
+    (34) exp -> ID .
+
+    THEN            reduce using rule 34 (exp -> ID .)
+    PLUS            reduce using rule 34 (exp -> ID .)
+    MINUS           reduce using rule 34 (exp -> ID .)
+    TIMES           reduce using rule 34 (exp -> ID .)
+    DIVIDE          reduce using rule 34 (exp -> ID .)
+    EQ              reduce using rule 34 (exp -> ID .)
+    LE              reduce using rule 34 (exp -> ID .)
+    AND             reduce using rule 34 (exp -> ID .)
+    OR              reduce using rule 34 (exp -> ID .)
+    ID              reduce using rule 34 (exp -> ID .)
+    INPUT           reduce using rule 34 (exp -> ID .)
+    PRINT           reduce using rule 34 (exp -> ID .)
+    END             reduce using rule 34 (exp -> ID .)
+    IF              reduce using rule 34 (exp -> ID .)
+    WHILE           reduce using rule 34 (exp -> ID .)
+    FOR             reduce using rule 34 (exp -> ID .)
+    $end            reduce using rule 34 (exp -> ID .)
+    ENDWHILE        reduce using rule 34 (exp -> ID .)
+    ELSE            reduce using rule 34 (exp -> ID .)
+    ENDIF           reduce using rule 34 (exp -> ID .)
+    NEXT            reduce using rule 34 (exp -> ID .)
+    )               reduce using rule 34 (exp -> ID .)
+    TO              reduce using rule 34 (exp -> ID .)
+    STEP            reduce using rule 34 (exp -> ID .)
+
+
+state 26
+
+    (9) stmt -> WHILE exp . stmt_list ENDWHILE
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+    (2) stmt_list -> . stmt stmt_list
+    (3) stmt_list -> . stmt
+    (4) stmt -> . ID = exp
+    (5) stmt -> . INPUT opt_string ID
+    (6) stmt -> . PRINT value value_list
+    (7) stmt -> . END
+    (8) stmt -> . IF exp THEN stmt_list opt_else ENDIF
+    (9) stmt -> . WHILE exp stmt_list ENDWHILE
+    (10) stmt -> . FOR ID = exp TO exp opt_step stmt_list NEXT ID
+
+    PLUS            shift and go to state 35
+    MINUS           shift and go to state 36
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+    EQ              shift and go to state 39
+    LE              shift and go to state 40
+    AND             shift and go to state 41
+    OR              shift and go to state 42
+    ID              shift and go to state 4
+    INPUT           shift and go to state 5
+    PRINT           shift and go to state 6
+    END             shift and go to state 7
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
+    FOR             shift and go to state 10
+
+    stmt_list                      shift and go to state 46
+    stmt                           shift and go to state 3
+
+state 27
+
+    (10) stmt -> FOR ID . = exp TO exp opt_step stmt_list NEXT ID
+
+    =               shift and go to state 47
+
+
+state 28
+
+    (4) stmt -> ID = exp .
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    ID              reduce using rule 4 (stmt -> ID = exp .)
+    INPUT           reduce using rule 4 (stmt -> ID = exp .)
+    PRINT           reduce using rule 4 (stmt -> ID = exp .)
+    END             reduce using rule 4 (stmt -> ID = exp .)
+    IF              reduce using rule 4 (stmt -> ID = exp .)
+    WHILE           reduce using rule 4 (stmt -> ID = exp .)
+    FOR             reduce using rule 4 (stmt -> ID = exp .)
+    $end            reduce using rule 4 (stmt -> ID = exp .)
+    ENDWHILE        reduce using rule 4 (stmt -> ID = exp .)
+    ELSE            reduce using rule 4 (stmt -> ID = exp .)
+    ENDIF           reduce using rule 4 (stmt -> ID = exp .)
+    NEXT            reduce using rule 4 (stmt -> ID = exp .)
+    PLUS            shift and go to state 35
+    MINUS           shift and go to state 36
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+    EQ              shift and go to state 39
+    LE              shift and go to state 40
+    AND             shift and go to state 41
+    OR              shift and go to state 42
+
+
+state 29
+
+    (5) stmt -> INPUT opt_string ID .
+
+    ID              reduce using rule 5 (stmt -> INPUT opt_string ID .)
+    INPUT           reduce using rule 5 (stmt -> INPUT opt_string ID .)
+    PRINT           reduce using rule 5 (stmt -> INPUT opt_string ID .)
+    END             reduce using rule 5 (stmt -> INPUT opt_string ID .)
+    IF              reduce using rule 5 (stmt -> INPUT opt_string ID .)
+    WHILE           reduce using rule 5 (stmt -> INPUT opt_string ID .)
+    FOR             reduce using rule 5 (stmt -> INPUT opt_string ID .)
+    $end            reduce using rule 5 (stmt -> INPUT opt_string ID .)
+    ENDWHILE        reduce using rule 5 (stmt -> INPUT opt_string ID .)
+    ELSE            reduce using rule 5 (stmt -> INPUT opt_string ID .)
+    ENDIF           reduce using rule 5 (stmt -> INPUT opt_string ID .)
+    NEXT            reduce using rule 5 (stmt -> INPUT opt_string ID .)
+
+
+state 30
+
+    (13) opt_string -> STRING , .
+
+    ID              reduce using rule 13 (opt_string -> STRING , .)
+
+
+state 31
+
+    (6) stmt -> PRINT value value_list .
+
+    ID              reduce using rule 6 (stmt -> PRINT value value_list .)
+    INPUT           reduce using rule 6 (stmt -> PRINT value value_list .)
+    PRINT           reduce using rule 6 (stmt -> PRINT value value_list .)
+    END             reduce using rule 6 (stmt -> PRINT value value_list .)
+    IF              reduce using rule 6 (stmt -> PRINT value value_list .)
+    WHILE           reduce using rule 6 (stmt -> PRINT value value_list .)
+    FOR             reduce using rule 6 (stmt -> PRINT value value_list .)
+    $end            reduce using rule 6 (stmt -> PRINT value value_list .)
+    ENDWHILE        reduce using rule 6 (stmt -> PRINT value value_list .)
+    ELSE            reduce using rule 6 (stmt -> PRINT value value_list .)
+    ENDIF           reduce using rule 6 (stmt -> PRINT value value_list .)
+    NEXT            reduce using rule 6 (stmt -> PRINT value value_list .)
+
+
+state 32
+
+    (17) value_list -> , . value value_list
+    (19) value -> . ID
+    (20) value -> . INTEGER
+    (21) value -> . STRING
+
+    ID              shift and go to state 17
+    INTEGER         shift and go to state 18
+    STRING          shift and go to state 19
+
+    value                          shift and go to state 48
+
+state 33
+
+    (18) value_list -> empty .
+
+    ID              reduce using rule 18 (value_list -> empty .)
+    INPUT           reduce using rule 18 (value_list -> empty .)
+    PRINT           reduce using rule 18 (value_list -> empty .)
+    END             reduce using rule 18 (value_list -> empty .)
+    IF              reduce using rule 18 (value_list -> empty .)
+    WHILE           reduce using rule 18 (value_list -> empty .)
+    FOR             reduce using rule 18 (value_list -> empty .)
+    $end            reduce using rule 18 (value_list -> empty .)
+    ENDWHILE        reduce using rule 18 (value_list -> empty .)
+    ELSE            reduce using rule 18 (value_list -> empty .)
+    ENDIF           reduce using rule 18 (value_list -> empty .)
+    NEXT            reduce using rule 18 (value_list -> empty .)
+
+
+state 34
+
+    (8) stmt -> IF exp THEN . stmt_list opt_else ENDIF
+    (2) stmt_list -> . stmt stmt_list
+    (3) stmt_list -> . stmt
+    (4) stmt -> . ID = exp
+    (5) stmt -> . INPUT opt_string ID
+    (6) stmt -> . PRINT value value_list
+    (7) stmt -> . END
+    (8) stmt -> . IF exp THEN stmt_list opt_else ENDIF
+    (9) stmt -> . WHILE exp stmt_list ENDWHILE
+    (10) stmt -> . FOR ID = exp TO exp opt_step stmt_list NEXT ID
+
+    ID              shift and go to state 4
+    INPUT           shift and go to state 5
+    PRINT           shift and go to state 6
+    END             shift and go to state 7
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
+    FOR             shift and go to state 10
+
+    stmt_list                      shift and go to state 49
+    stmt                           shift and go to state 3
+
+state 35
+
+    (22) exp -> exp PLUS . exp
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 50
+
+state 36
+
+    (23) exp -> exp MINUS . exp
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 51
+
+state 37
+
+    (24) exp -> exp TIMES . exp
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 52
+
+state 38
+
+    (25) exp -> exp DIVIDE . exp
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 53
+
+state 39
+
+    (26) exp -> exp EQ . exp
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 54
+
+state 40
+
+    (27) exp -> exp LE . exp
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 55
+
+state 41
+
+    (28) exp -> exp AND . exp
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 56
+
+state 42
+
+    (29) exp -> exp OR . exp
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 57
+
+state 43
+
+    (31) exp -> MINUS exp .
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    THEN            reduce using rule 31 (exp -> MINUS exp .)
+    PLUS            reduce using rule 31 (exp -> MINUS exp .)
+    MINUS           reduce using rule 31 (exp -> MINUS exp .)
+    TIMES           reduce using rule 31 (exp -> MINUS exp .)
+    DIVIDE          reduce using rule 31 (exp -> MINUS exp .)
+    EQ              reduce using rule 31 (exp -> MINUS exp .)
+    LE              reduce using rule 31 (exp -> MINUS exp .)
+    AND             reduce using rule 31 (exp -> MINUS exp .)
+    OR              reduce using rule 31 (exp -> MINUS exp .)
+    ID              reduce using rule 31 (exp -> MINUS exp .)
+    INPUT           reduce using rule 31 (exp -> MINUS exp .)
+    PRINT           reduce using rule 31 (exp -> MINUS exp .)
+    END             reduce using rule 31 (exp -> MINUS exp .)
+    IF              reduce using rule 31 (exp -> MINUS exp .)
+    WHILE           reduce using rule 31 (exp -> MINUS exp .)
+    FOR             reduce using rule 31 (exp -> MINUS exp .)
+    $end            reduce using rule 31 (exp -> MINUS exp .)
+    ENDWHILE        reduce using rule 31 (exp -> MINUS exp .)
+    ELSE            reduce using rule 31 (exp -> MINUS exp .)
+    ENDIF           reduce using rule 31 (exp -> MINUS exp .)
+    NEXT            reduce using rule 31 (exp -> MINUS exp .)
+    )               reduce using rule 31 (exp -> MINUS exp .)
+    TO              reduce using rule 31 (exp -> MINUS exp .)
+    STEP            reduce using rule 31 (exp -> MINUS exp .)
+
+  ! PLUS            [ shift and go to state 35 ]
+  ! MINUS           [ shift and go to state 36 ]
+  ! TIMES           [ shift and go to state 37 ]
+  ! DIVIDE          [ shift and go to state 38 ]
+  ! EQ              [ shift and go to state 39 ]
+  ! LE              [ shift and go to state 40 ]
+  ! AND             [ shift and go to state 41 ]
+  ! OR              [ shift and go to state 42 ]
+
+
+state 44
+
+    (30) exp -> ( exp . )
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    )               shift and go to state 58
+    PLUS            shift and go to state 35
+    MINUS           shift and go to state 36
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+    EQ              shift and go to state 39
+    LE              shift and go to state 40
+    AND             shift and go to state 41
+    OR              shift and go to state 42
+
+
+state 45
+
+    (32) exp -> NOT exp .
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    THEN            reduce using rule 32 (exp -> NOT exp .)
+    PLUS            reduce using rule 32 (exp -> NOT exp .)
+    MINUS           reduce using rule 32 (exp -> NOT exp .)
+    TIMES           reduce using rule 32 (exp -> NOT exp .)
+    DIVIDE          reduce using rule 32 (exp -> NOT exp .)
+    EQ              reduce using rule 32 (exp -> NOT exp .)
+    LE              reduce using rule 32 (exp -> NOT exp .)
+    AND             reduce using rule 32 (exp -> NOT exp .)
+    OR              reduce using rule 32 (exp -> NOT exp .)
+    ID              reduce using rule 32 (exp -> NOT exp .)
+    INPUT           reduce using rule 32 (exp -> NOT exp .)
+    PRINT           reduce using rule 32 (exp -> NOT exp .)
+    END             reduce using rule 32 (exp -> NOT exp .)
+    IF              reduce using rule 32 (exp -> NOT exp .)
+    WHILE           reduce using rule 32 (exp -> NOT exp .)
+    FOR             reduce using rule 32 (exp -> NOT exp .)
+    $end            reduce using rule 32 (exp -> NOT exp .)
+    ENDWHILE        reduce using rule 32 (exp -> NOT exp .)
+    ELSE            reduce using rule 32 (exp -> NOT exp .)
+    ENDIF           reduce using rule 32 (exp -> NOT exp .)
+    NEXT            reduce using rule 32 (exp -> NOT exp .)
+    )               reduce using rule 32 (exp -> NOT exp .)
+    TO              reduce using rule 32 (exp -> NOT exp .)
+    STEP            reduce using rule 32 (exp -> NOT exp .)
+
+  ! PLUS            [ shift and go to state 35 ]
+  ! MINUS           [ shift and go to state 36 ]
+  ! TIMES           [ shift and go to state 37 ]
+  ! DIVIDE          [ shift and go to state 38 ]
+  ! EQ              [ shift and go to state 39 ]
+  ! LE              [ shift and go to state 40 ]
+  ! AND             [ shift and go to state 41 ]
+  ! OR              [ shift and go to state 42 ]
+
+
+state 46
+
+    (9) stmt -> WHILE exp stmt_list . ENDWHILE
+
+    ENDWHILE        shift and go to state 59
+
+
+state 47
+
+    (10) stmt -> FOR ID = . exp TO exp opt_step stmt_list NEXT ID
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 60
+
+state 48
+
+    (17) value_list -> , value . value_list
+    (17) value_list -> . , value value_list
+    (18) value_list -> . empty
+    (35) empty -> .
+
+    ,               shift and go to state 32
+    ID              reduce using rule 35 (empty -> .)
+    INPUT           reduce using rule 35 (empty -> .)
+    PRINT           reduce using rule 35 (empty -> .)
+    END             reduce using rule 35 (empty -> .)
+    IF              reduce using rule 35 (empty -> .)
+    WHILE           reduce using rule 35 (empty -> .)
+    FOR             reduce using rule 35 (empty -> .)
+    $end            reduce using rule 35 (empty -> .)
+    ENDWHILE        reduce using rule 35 (empty -> .)
+    ELSE            reduce using rule 35 (empty -> .)
+    ENDIF           reduce using rule 35 (empty -> .)
+    NEXT            reduce using rule 35 (empty -> .)
+
+    value_list                     shift and go to state 61
+    empty                          shift and go to state 33
+
+state 49
+
+    (8) stmt -> IF exp THEN stmt_list . opt_else ENDIF
+    (15) opt_else -> . ELSE stmt_list
+    (16) opt_else -> . empty
+    (35) empty -> .
+
+    ELSE            shift and go to state 63
+    ENDIF           reduce using rule 35 (empty -> .)
+
+    opt_else                       shift and go to state 62
+    empty                          shift and go to state 64
+
+state 50
+
+    (22) exp -> exp PLUS exp .
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    THEN            reduce using rule 22 (exp -> exp PLUS exp .)
+    PLUS            reduce using rule 22 (exp -> exp PLUS exp .)
+    MINUS           reduce using rule 22 (exp -> exp PLUS exp .)
+    EQ              reduce using rule 22 (exp -> exp PLUS exp .)
+    LE              reduce using rule 22 (exp -> exp PLUS exp .)
+    AND             reduce using rule 22 (exp -> exp PLUS exp .)
+    OR              reduce using rule 22 (exp -> exp PLUS exp .)
+    ID              reduce using rule 22 (exp -> exp PLUS exp .)
+    INPUT           reduce using rule 22 (exp -> exp PLUS exp .)
+    PRINT           reduce using rule 22 (exp -> exp PLUS exp .)
+    END             reduce using rule 22 (exp -> exp PLUS exp .)
+    IF              reduce using rule 22 (exp -> exp PLUS exp .)
+    WHILE           reduce using rule 22 (exp -> exp PLUS exp .)
+    FOR             reduce using rule 22 (exp -> exp PLUS exp .)
+    $end            reduce using rule 22 (exp -> exp PLUS exp .)
+    ENDWHILE        reduce using rule 22 (exp -> exp PLUS exp .)
+    ELSE            reduce using rule 22 (exp -> exp PLUS exp .)
+    ENDIF           reduce using rule 22 (exp -> exp PLUS exp .)
+    NEXT            reduce using rule 22 (exp -> exp PLUS exp .)
+    )               reduce using rule 22 (exp -> exp PLUS exp .)
+    TO              reduce using rule 22 (exp -> exp PLUS exp .)
+    STEP            reduce using rule 22 (exp -> exp PLUS exp .)
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+
+  ! TIMES           [ reduce using rule 22 (exp -> exp PLUS exp .) ]
+  ! DIVIDE          [ reduce using rule 22 (exp -> exp PLUS exp .) ]
+  ! PLUS            [ shift and go to state 35 ]
+  ! MINUS           [ shift and go to state 36 ]
+  ! EQ              [ shift and go to state 39 ]
+  ! LE              [ shift and go to state 40 ]
+  ! AND             [ shift and go to state 41 ]
+  ! OR              [ shift and go to state 42 ]
+
+
+state 51
+
+    (23) exp -> exp MINUS exp .
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    THEN            reduce using rule 23 (exp -> exp MINUS exp .)
+    PLUS            reduce using rule 23 (exp -> exp MINUS exp .)
+    MINUS           reduce using rule 23 (exp -> exp MINUS exp .)
+    EQ              reduce using rule 23 (exp -> exp MINUS exp .)
+    LE              reduce using rule 23 (exp -> exp MINUS exp .)
+    AND             reduce using rule 23 (exp -> exp MINUS exp .)
+    OR              reduce using rule 23 (exp -> exp MINUS exp .)
+    ID              reduce using rule 23 (exp -> exp MINUS exp .)
+    INPUT           reduce using rule 23 (exp -> exp MINUS exp .)
+    PRINT           reduce using rule 23 (exp -> exp MINUS exp .)
+    END             reduce using rule 23 (exp -> exp MINUS exp .)
+    IF              reduce using rule 23 (exp -> exp MINUS exp .)
+    WHILE           reduce using rule 23 (exp -> exp MINUS exp .)
+    FOR             reduce using rule 23 (exp -> exp MINUS exp .)
+    $end            reduce using rule 23 (exp -> exp MINUS exp .)
+    ENDWHILE        reduce using rule 23 (exp -> exp MINUS exp .)
+    ELSE            reduce using rule 23 (exp -> exp MINUS exp .)
+    ENDIF           reduce using rule 23 (exp -> exp MINUS exp .)
+    NEXT            reduce using rule 23 (exp -> exp MINUS exp .)
+    )               reduce using rule 23 (exp -> exp MINUS exp .)
+    TO              reduce using rule 23 (exp -> exp MINUS exp .)
+    STEP            reduce using rule 23 (exp -> exp MINUS exp .)
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+
+  ! TIMES           [ reduce using rule 23 (exp -> exp MINUS exp .) ]
+  ! DIVIDE          [ reduce using rule 23 (exp -> exp MINUS exp .) ]
+  ! PLUS            [ shift and go to state 35 ]
+  ! MINUS           [ shift and go to state 36 ]
+  ! EQ              [ shift and go to state 39 ]
+  ! LE              [ shift and go to state 40 ]
+  ! AND             [ shift and go to state 41 ]
+  ! OR              [ shift and go to state 42 ]
+
+
+state 52
+
+    (24) exp -> exp TIMES exp .
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    THEN            reduce using rule 24 (exp -> exp TIMES exp .)
+    PLUS            reduce using rule 24 (exp -> exp TIMES exp .)
+    MINUS           reduce using rule 24 (exp -> exp TIMES exp .)
+    TIMES           reduce using rule 24 (exp -> exp TIMES exp .)
+    DIVIDE          reduce using rule 24 (exp -> exp TIMES exp .)
+    EQ              reduce using rule 24 (exp -> exp TIMES exp .)
+    LE              reduce using rule 24 (exp -> exp TIMES exp .)
+    AND             reduce using rule 24 (exp -> exp TIMES exp .)
+    OR              reduce using rule 24 (exp -> exp TIMES exp .)
+    ID              reduce using rule 24 (exp -> exp TIMES exp .)
+    INPUT           reduce using rule 24 (exp -> exp TIMES exp .)
+    PRINT           reduce using rule 24 (exp -> exp TIMES exp .)
+    END             reduce using rule 24 (exp -> exp TIMES exp .)
+    IF              reduce using rule 24 (exp -> exp TIMES exp .)
+    WHILE           reduce using rule 24 (exp -> exp TIMES exp .)
+    FOR             reduce using rule 24 (exp -> exp TIMES exp .)
+    $end            reduce using rule 24 (exp -> exp TIMES exp .)
+    ENDWHILE        reduce using rule 24 (exp -> exp TIMES exp .)
+    ELSE            reduce using rule 24 (exp -> exp TIMES exp .)
+    ENDIF           reduce using rule 24 (exp -> exp TIMES exp .)
+    NEXT            reduce using rule 24 (exp -> exp TIMES exp .)
+    )               reduce using rule 24 (exp -> exp TIMES exp .)
+    TO              reduce using rule 24 (exp -> exp TIMES exp .)
+    STEP            reduce using rule 24 (exp -> exp TIMES exp .)
+
+  ! PLUS            [ shift and go to state 35 ]
+  ! MINUS           [ shift and go to state 36 ]
+  ! TIMES           [ shift and go to state 37 ]
+  ! DIVIDE          [ shift and go to state 38 ]
+  ! EQ              [ shift and go to state 39 ]
+  ! LE              [ shift and go to state 40 ]
+  ! AND             [ shift and go to state 41 ]
+  ! OR              [ shift and go to state 42 ]
+
+
+state 53
+
+    (25) exp -> exp DIVIDE exp .
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    THEN            reduce using rule 25 (exp -> exp DIVIDE exp .)
+    PLUS            reduce using rule 25 (exp -> exp DIVIDE exp .)
+    MINUS           reduce using rule 25 (exp -> exp DIVIDE exp .)
+    TIMES           reduce using rule 25 (exp -> exp DIVIDE exp .)
+    DIVIDE          reduce using rule 25 (exp -> exp DIVIDE exp .)
+    EQ              reduce using rule 25 (exp -> exp DIVIDE exp .)
+    LE              reduce using rule 25 (exp -> exp DIVIDE exp .)
+    AND             reduce using rule 25 (exp -> exp DIVIDE exp .)
+    OR              reduce using rule 25 (exp -> exp DIVIDE exp .)
+    ID              reduce using rule 25 (exp -> exp DIVIDE exp .)
+    INPUT           reduce using rule 25 (exp -> exp DIVIDE exp .)
+    PRINT           reduce using rule 25 (exp -> exp DIVIDE exp .)
+    END             reduce using rule 25 (exp -> exp DIVIDE exp .)
+    IF              reduce using rule 25 (exp -> exp DIVIDE exp .)
+    WHILE           reduce using rule 25 (exp -> exp DIVIDE exp .)
+    FOR             reduce using rule 25 (exp -> exp DIVIDE exp .)
+    $end            reduce using rule 25 (exp -> exp DIVIDE exp .)
+    ENDWHILE        reduce using rule 25 (exp -> exp DIVIDE exp .)
+    ELSE            reduce using rule 25 (exp -> exp DIVIDE exp .)
+    ENDIF           reduce using rule 25 (exp -> exp DIVIDE exp .)
+    NEXT            reduce using rule 25 (exp -> exp DIVIDE exp .)
+    )               reduce using rule 25 (exp -> exp DIVIDE exp .)
+    TO              reduce using rule 25 (exp -> exp DIVIDE exp .)
+    STEP            reduce using rule 25 (exp -> exp DIVIDE exp .)
+
+  ! PLUS            [ shift and go to state 35 ]
+  ! MINUS           [ shift and go to state 36 ]
+  ! TIMES           [ shift and go to state 37 ]
+  ! DIVIDE          [ shift and go to state 38 ]
+  ! EQ              [ shift and go to state 39 ]
+  ! LE              [ shift and go to state 40 ]
+  ! AND             [ shift and go to state 41 ]
+  ! OR              [ shift and go to state 42 ]
+
+
+state 54
+
+    (26) exp -> exp EQ exp .
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    THEN            reduce using rule 26 (exp -> exp EQ exp .)
+    EQ              reduce using rule 26 (exp -> exp EQ exp .)
+    LE              reduce using rule 26 (exp -> exp EQ exp .)
+    AND             reduce using rule 26 (exp -> exp EQ exp .)
+    OR              reduce using rule 26 (exp -> exp EQ exp .)
+    ID              reduce using rule 26 (exp -> exp EQ exp .)
+    INPUT           reduce using rule 26 (exp -> exp EQ exp .)
+    PRINT           reduce using rule 26 (exp -> exp EQ exp .)
+    END             reduce using rule 26 (exp -> exp EQ exp .)
+    IF              reduce using rule 26 (exp -> exp EQ exp .)
+    WHILE           reduce using rule 26 (exp -> exp EQ exp .)
+    FOR             reduce using rule 26 (exp -> exp EQ exp .)
+    $end            reduce using rule 26 (exp -> exp EQ exp .)
+    ENDWHILE        reduce using rule 26 (exp -> exp EQ exp .)
+    ELSE            reduce using rule 26 (exp -> exp EQ exp .)
+    ENDIF           reduce using rule 26 (exp -> exp EQ exp .)
+    NEXT            reduce using rule 26 (exp -> exp EQ exp .)
+    )               reduce using rule 26 (exp -> exp EQ exp .)
+    TO              reduce using rule 26 (exp -> exp EQ exp .)
+    STEP            reduce using rule 26 (exp -> exp EQ exp .)
+    PLUS            shift and go to state 35
+    MINUS           shift and go to state 36
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+
+  ! PLUS            [ reduce using rule 26 (exp -> exp EQ exp .) ]
+  ! MINUS           [ reduce using rule 26 (exp -> exp EQ exp .) ]
+  ! TIMES           [ reduce using rule 26 (exp -> exp EQ exp .) ]
+  ! DIVIDE          [ reduce using rule 26 (exp -> exp EQ exp .) ]
+  ! EQ              [ shift and go to state 39 ]
+  ! LE              [ shift and go to state 40 ]
+  ! AND             [ shift and go to state 41 ]
+  ! OR              [ shift and go to state 42 ]
+
+
+state 55
+
+    (27) exp -> exp LE exp .
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    THEN            reduce using rule 27 (exp -> exp LE exp .)
+    EQ              reduce using rule 27 (exp -> exp LE exp .)
+    LE              reduce using rule 27 (exp -> exp LE exp .)
+    AND             reduce using rule 27 (exp -> exp LE exp .)
+    OR              reduce using rule 27 (exp -> exp LE exp .)
+    ID              reduce using rule 27 (exp -> exp LE exp .)
+    INPUT           reduce using rule 27 (exp -> exp LE exp .)
+    PRINT           reduce using rule 27 (exp -> exp LE exp .)
+    END             reduce using rule 27 (exp -> exp LE exp .)
+    IF              reduce using rule 27 (exp -> exp LE exp .)
+    WHILE           reduce using rule 27 (exp -> exp LE exp .)
+    FOR             reduce using rule 27 (exp -> exp LE exp .)
+    $end            reduce using rule 27 (exp -> exp LE exp .)
+    ENDWHILE        reduce using rule 27 (exp -> exp LE exp .)
+    ELSE            reduce using rule 27 (exp -> exp LE exp .)
+    ENDIF           reduce using rule 27 (exp -> exp LE exp .)
+    NEXT            reduce using rule 27 (exp -> exp LE exp .)
+    )               reduce using rule 27 (exp -> exp LE exp .)
+    TO              reduce using rule 27 (exp -> exp LE exp .)
+    STEP            reduce using rule 27 (exp -> exp LE exp .)
+    PLUS            shift and go to state 35
+    MINUS           shift and go to state 36
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+
+  ! PLUS            [ reduce using rule 27 (exp -> exp LE exp .) ]
+  ! MINUS           [ reduce using rule 27 (exp -> exp LE exp .) ]
+  ! TIMES           [ reduce using rule 27 (exp -> exp LE exp .) ]
+  ! DIVIDE          [ reduce using rule 27 (exp -> exp LE exp .) ]
+  ! EQ              [ shift and go to state 39 ]
+  ! LE              [ shift and go to state 40 ]
+  ! AND             [ shift and go to state 41 ]
+  ! OR              [ shift and go to state 42 ]
+
+
+state 56
+
+    (28) exp -> exp AND exp .
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    THEN            reduce using rule 28 (exp -> exp AND exp .)
+    AND             reduce using rule 28 (exp -> exp AND exp .)
+    OR              reduce using rule 28 (exp -> exp AND exp .)
+    ID              reduce using rule 28 (exp -> exp AND exp .)
+    INPUT           reduce using rule 28 (exp -> exp AND exp .)
+    PRINT           reduce using rule 28 (exp -> exp AND exp .)
+    END             reduce using rule 28 (exp -> exp AND exp .)
+    IF              reduce using rule 28 (exp -> exp AND exp .)
+    WHILE           reduce using rule 28 (exp -> exp AND exp .)
+    FOR             reduce using rule 28 (exp -> exp AND exp .)
+    $end            reduce using rule 28 (exp -> exp AND exp .)
+    ENDWHILE        reduce using rule 28 (exp -> exp AND exp .)
+    ELSE            reduce using rule 28 (exp -> exp AND exp .)
+    ENDIF           reduce using rule 28 (exp -> exp AND exp .)
+    NEXT            reduce using rule 28 (exp -> exp AND exp .)
+    )               reduce using rule 28 (exp -> exp AND exp .)
+    TO              reduce using rule 28 (exp -> exp AND exp .)
+    STEP            reduce using rule 28 (exp -> exp AND exp .)
+    PLUS            shift and go to state 35
+    MINUS           shift and go to state 36
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+    EQ              shift and go to state 39
+    LE              shift and go to state 40
+
+  ! PLUS            [ reduce using rule 28 (exp -> exp AND exp .) ]
+  ! MINUS           [ reduce using rule 28 (exp -> exp AND exp .) ]
+  ! TIMES           [ reduce using rule 28 (exp -> exp AND exp .) ]
+  ! DIVIDE          [ reduce using rule 28 (exp -> exp AND exp .) ]
+  ! EQ              [ reduce using rule 28 (exp -> exp AND exp .) ]
+  ! LE              [ reduce using rule 28 (exp -> exp AND exp .) ]
+  ! AND             [ shift and go to state 41 ]
+  ! OR              [ shift and go to state 42 ]
+
+
+state 57
+
+    (29) exp -> exp OR exp .
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    THEN            reduce using rule 29 (exp -> exp OR exp .)
+    AND             reduce using rule 29 (exp -> exp OR exp .)
+    OR              reduce using rule 29 (exp -> exp OR exp .)
+    ID              reduce using rule 29 (exp -> exp OR exp .)
+    INPUT           reduce using rule 29 (exp -> exp OR exp .)
+    PRINT           reduce using rule 29 (exp -> exp OR exp .)
+    END             reduce using rule 29 (exp -> exp OR exp .)
+    IF              reduce using rule 29 (exp -> exp OR exp .)
+    WHILE           reduce using rule 29 (exp -> exp OR exp .)
+    FOR             reduce using rule 29 (exp -> exp OR exp .)
+    $end            reduce using rule 29 (exp -> exp OR exp .)
+    ENDWHILE        reduce using rule 29 (exp -> exp OR exp .)
+    ELSE            reduce using rule 29 (exp -> exp OR exp .)
+    ENDIF           reduce using rule 29 (exp -> exp OR exp .)
+    NEXT            reduce using rule 29 (exp -> exp OR exp .)
+    )               reduce using rule 29 (exp -> exp OR exp .)
+    TO              reduce using rule 29 (exp -> exp OR exp .)
+    STEP            reduce using rule 29 (exp -> exp OR exp .)
+    PLUS            shift and go to state 35
+    MINUS           shift and go to state 36
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+    EQ              shift and go to state 39
+    LE              shift and go to state 40
+
+  ! PLUS            [ reduce using rule 29 (exp -> exp OR exp .) ]
+  ! MINUS           [ reduce using rule 29 (exp -> exp OR exp .) ]
+  ! TIMES           [ reduce using rule 29 (exp -> exp OR exp .) ]
+  ! DIVIDE          [ reduce using rule 29 (exp -> exp OR exp .) ]
+  ! EQ              [ reduce using rule 29 (exp -> exp OR exp .) ]
+  ! LE              [ reduce using rule 29 (exp -> exp OR exp .) ]
+  ! AND             [ shift and go to state 41 ]
+  ! OR              [ shift and go to state 42 ]
+
+
+state 58
+
+    (30) exp -> ( exp ) .
+
+    THEN            reduce using rule 30 (exp -> ( exp ) .)
+    PLUS            reduce using rule 30 (exp -> ( exp ) .)
+    MINUS           reduce using rule 30 (exp -> ( exp ) .)
+    TIMES           reduce using rule 30 (exp -> ( exp ) .)
+    DIVIDE          reduce using rule 30 (exp -> ( exp ) .)
+    EQ              reduce using rule 30 (exp -> ( exp ) .)
+    LE              reduce using rule 30 (exp -> ( exp ) .)
+    AND             reduce using rule 30 (exp -> ( exp ) .)
+    OR              reduce using rule 30 (exp -> ( exp ) .)
+    ID              reduce using rule 30 (exp -> ( exp ) .)
+    INPUT           reduce using rule 30 (exp -> ( exp ) .)
+    PRINT           reduce using rule 30 (exp -> ( exp ) .)
+    END             reduce using rule 30 (exp -> ( exp ) .)
+    IF              reduce using rule 30 (exp -> ( exp ) .)
+    WHILE           reduce using rule 30 (exp -> ( exp ) .)
+    FOR             reduce using rule 30 (exp -> ( exp ) .)
+    $end            reduce using rule 30 (exp -> ( exp ) .)
+    ENDWHILE        reduce using rule 30 (exp -> ( exp ) .)
+    ELSE            reduce using rule 30 (exp -> ( exp ) .)
+    ENDIF           reduce using rule 30 (exp -> ( exp ) .)
+    NEXT            reduce using rule 30 (exp -> ( exp ) .)
+    )               reduce using rule 30 (exp -> ( exp ) .)
+    TO              reduce using rule 30 (exp -> ( exp ) .)
+    STEP            reduce using rule 30 (exp -> ( exp ) .)
+
+
+state 59
+
+    (9) stmt -> WHILE exp stmt_list ENDWHILE .
+
+    ID              reduce using rule 9 (stmt -> WHILE exp stmt_list ENDWHILE .)
+    INPUT           reduce using rule 9 (stmt -> WHILE exp stmt_list ENDWHILE .)
+    PRINT           reduce using rule 9 (stmt -> WHILE exp stmt_list ENDWHILE .)
+    END             reduce using rule 9 (stmt -> WHILE exp stmt_list ENDWHILE .)
+    IF              reduce using rule 9 (stmt -> WHILE exp stmt_list ENDWHILE .)
+    WHILE           reduce using rule 9 (stmt -> WHILE exp stmt_list ENDWHILE .)
+    FOR             reduce using rule 9 (stmt -> WHILE exp stmt_list ENDWHILE .)
+    $end            reduce using rule 9 (stmt -> WHILE exp stmt_list ENDWHILE .)
+    ENDWHILE        reduce using rule 9 (stmt -> WHILE exp stmt_list ENDWHILE .)
+    ELSE            reduce using rule 9 (stmt -> WHILE exp stmt_list ENDWHILE .)
+    ENDIF           reduce using rule 9 (stmt -> WHILE exp stmt_list ENDWHILE .)
+    NEXT            reduce using rule 9 (stmt -> WHILE exp stmt_list ENDWHILE .)
+
+
+state 60
+
+    (10) stmt -> FOR ID = exp . TO exp opt_step stmt_list NEXT ID
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    TO              shift and go to state 65
+    PLUS            shift and go to state 35
+    MINUS           shift and go to state 36
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+    EQ              shift and go to state 39
+    LE              shift and go to state 40
+    AND             shift and go to state 41
+    OR              shift and go to state 42
+
+
+state 61
+
+    (17) value_list -> , value value_list .
+
+    ID              reduce using rule 17 (value_list -> , value value_list .)
+    INPUT           reduce using rule 17 (value_list -> , value value_list .)
+    PRINT           reduce using rule 17 (value_list -> , value value_list .)
+    END             reduce using rule 17 (value_list -> , value value_list .)
+    IF              reduce using rule 17 (value_list -> , value value_list .)
+    WHILE           reduce using rule 17 (value_list -> , value value_list .)
+    FOR             reduce using rule 17 (value_list -> , value value_list .)
+    $end            reduce using rule 17 (value_list -> , value value_list .)
+    ENDWHILE        reduce using rule 17 (value_list -> , value value_list .)
+    ELSE            reduce using rule 17 (value_list -> , value value_list .)
+    ENDIF           reduce using rule 17 (value_list -> , value value_list .)
+    NEXT            reduce using rule 17 (value_list -> , value value_list .)
+
+
+state 62
+
+    (8) stmt -> IF exp THEN stmt_list opt_else . ENDIF
+
+    ENDIF           shift and go to state 66
+
+
+state 63
+
+    (15) opt_else -> ELSE . stmt_list
+    (2) stmt_list -> . stmt stmt_list
+    (3) stmt_list -> . stmt
+    (4) stmt -> . ID = exp
+    (5) stmt -> . INPUT opt_string ID
+    (6) stmt -> . PRINT value value_list
+    (7) stmt -> . END
+    (8) stmt -> . IF exp THEN stmt_list opt_else ENDIF
+    (9) stmt -> . WHILE exp stmt_list ENDWHILE
+    (10) stmt -> . FOR ID = exp TO exp opt_step stmt_list NEXT ID
+
+    ID              shift and go to state 4
+    INPUT           shift and go to state 5
+    PRINT           shift and go to state 6
+    END             shift and go to state 7
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
+    FOR             shift and go to state 10
+
+    stmt_list                      shift and go to state 67
+    stmt                           shift and go to state 3
+
+state 64
+
+    (16) opt_else -> empty .
+
+    ENDIF           reduce using rule 16 (opt_else -> empty .)
+
+
+state 65
+
+    (10) stmt -> FOR ID = exp TO . exp opt_step stmt_list NEXT ID
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 68
+
+state 66
+
+    (8) stmt -> IF exp THEN stmt_list opt_else ENDIF .
+
+    ID              reduce using rule 8 (stmt -> IF exp THEN stmt_list opt_else ENDIF .)
+    INPUT           reduce using rule 8 (stmt -> IF exp THEN stmt_list opt_else ENDIF .)
+    PRINT           reduce using rule 8 (stmt -> IF exp THEN stmt_list opt_else ENDIF .)
+    END             reduce using rule 8 (stmt -> IF exp THEN stmt_list opt_else ENDIF .)
+    IF              reduce using rule 8 (stmt -> IF exp THEN stmt_list opt_else ENDIF .)
+    WHILE           reduce using rule 8 (stmt -> IF exp THEN stmt_list opt_else ENDIF .)
+    FOR             reduce using rule 8 (stmt -> IF exp THEN stmt_list opt_else ENDIF .)
+    $end            reduce using rule 8 (stmt -> IF exp THEN stmt_list opt_else ENDIF .)
+    ENDWHILE        reduce using rule 8 (stmt -> IF exp THEN stmt_list opt_else ENDIF .)
+    ELSE            reduce using rule 8 (stmt -> IF exp THEN stmt_list opt_else ENDIF .)
+    ENDIF           reduce using rule 8 (stmt -> IF exp THEN stmt_list opt_else ENDIF .)
+    NEXT            reduce using rule 8 (stmt -> IF exp THEN stmt_list opt_else ENDIF .)
+
+
+state 67
+
+    (15) opt_else -> ELSE stmt_list .
+
+    ENDIF           reduce using rule 15 (opt_else -> ELSE stmt_list .)
+
+
+state 68
+
+    (10) stmt -> FOR ID = exp TO exp . opt_step stmt_list NEXT ID
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+    (11) opt_step -> . STEP exp
+    (12) opt_step -> . empty
+    (35) empty -> .
+
+    PLUS            shift and go to state 35
+    MINUS           shift and go to state 36
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+    EQ              shift and go to state 39
+    LE              shift and go to state 40
+    AND             shift and go to state 41
+    OR              shift and go to state 42
+    STEP            shift and go to state 70
+    ID              reduce using rule 35 (empty -> .)
+    INPUT           reduce using rule 35 (empty -> .)
+    PRINT           reduce using rule 35 (empty -> .)
+    END             reduce using rule 35 (empty -> .)
+    IF              reduce using rule 35 (empty -> .)
+    WHILE           reduce using rule 35 (empty -> .)
+    FOR             reduce using rule 35 (empty -> .)
+
+    opt_step                       shift and go to state 69
+    empty                          shift and go to state 71
+
+state 69
+
+    (10) stmt -> FOR ID = exp TO exp opt_step . stmt_list NEXT ID
+    (2) stmt_list -> . stmt stmt_list
+    (3) stmt_list -> . stmt
+    (4) stmt -> . ID = exp
+    (5) stmt -> . INPUT opt_string ID
+    (6) stmt -> . PRINT value value_list
+    (7) stmt -> . END
+    (8) stmt -> . IF exp THEN stmt_list opt_else ENDIF
+    (9) stmt -> . WHILE exp stmt_list ENDWHILE
+    (10) stmt -> . FOR ID = exp TO exp opt_step stmt_list NEXT ID
+
+    ID              shift and go to state 4
+    INPUT           shift and go to state 5
+    PRINT           shift and go to state 6
+    END             shift and go to state 7
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
+    FOR             shift and go to state 10
+
+    stmt_list                      shift and go to state 72
+    stmt                           shift and go to state 3
+
+state 70
+
+    (11) opt_step -> STEP . exp
+    (22) exp -> . exp PLUS exp
+    (23) exp -> . exp MINUS exp
+    (24) exp -> . exp TIMES exp
+    (25) exp -> . exp DIVIDE exp
+    (26) exp -> . exp EQ exp
+    (27) exp -> . exp LE exp
+    (28) exp -> . exp AND exp
+    (29) exp -> . exp OR exp
+    (30) exp -> . ( exp )
+    (31) exp -> . MINUS exp
+    (32) exp -> . NOT exp
+    (33) exp -> . INTEGER
+    (34) exp -> . ID
+
+    (               shift and go to state 22
+    MINUS           shift and go to state 21
+    NOT             shift and go to state 23
+    INTEGER         shift and go to state 24
+    ID              shift and go to state 25
+
+    exp                            shift and go to state 73
+
+state 71
+
+    (12) opt_step -> empty .
+
+    ID              reduce using rule 12 (opt_step -> empty .)
+    INPUT           reduce using rule 12 (opt_step -> empty .)
+    PRINT           reduce using rule 12 (opt_step -> empty .)
+    END             reduce using rule 12 (opt_step -> empty .)
+    IF              reduce using rule 12 (opt_step -> empty .)
+    WHILE           reduce using rule 12 (opt_step -> empty .)
+    FOR             reduce using rule 12 (opt_step -> empty .)
+
+
+state 72
+
+    (10) stmt -> FOR ID = exp TO exp opt_step stmt_list . NEXT ID
+
+    NEXT            shift and go to state 74
+
+
+state 73
+
+    (11) opt_step -> STEP exp .
+    (22) exp -> exp . PLUS exp
+    (23) exp -> exp . MINUS exp
+    (24) exp -> exp . TIMES exp
+    (25) exp -> exp . DIVIDE exp
+    (26) exp -> exp . EQ exp
+    (27) exp -> exp . LE exp
+    (28) exp -> exp . AND exp
+    (29) exp -> exp . OR exp
+
+    ID              reduce using rule 11 (opt_step -> STEP exp .)
+    INPUT           reduce using rule 11 (opt_step -> STEP exp .)
+    PRINT           reduce using rule 11 (opt_step -> STEP exp .)
+    END             reduce using rule 11 (opt_step -> STEP exp .)
+    IF              reduce using rule 11 (opt_step -> STEP exp .)
+    WHILE           reduce using rule 11 (opt_step -> STEP exp .)
+    FOR             reduce using rule 11 (opt_step -> STEP exp .)
+    PLUS            shift and go to state 35
+    MINUS           shift and go to state 36
+    TIMES           shift and go to state 37
+    DIVIDE          shift and go to state 38
+    EQ              shift and go to state 39
+    LE              shift and go to state 40
+    AND             shift and go to state 41
+    OR              shift and go to state 42
+
+
+state 74
+
+    (10) stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT . ID
+
+    ID              shift and go to state 75
+
+
+state 75
+
+    (10) stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT ID .
+
+    ID              reduce using rule 10 (stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT ID .)
+    INPUT           reduce using rule 10 (stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT ID .)
+    PRINT           reduce using rule 10 (stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT ID .)
+    END             reduce using rule 10 (stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT ID .)
+    IF              reduce using rule 10 (stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT ID .)
+    WHILE           reduce using rule 10 (stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT ID .)
+    FOR             reduce using rule 10 (stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT ID .)
+    $end            reduce using rule 10 (stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT ID .)
+    ENDWHILE        reduce using rule 10 (stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT ID .)
+    ELSE            reduce using rule 10 (stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT ID .)
+    ENDIF           reduce using rule 10 (stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT ID .)
+    NEXT            reduce using rule 10 (stmt -> FOR ID = exp TO exp opt_step stmt_list NEXT ID .)
+
